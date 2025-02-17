@@ -1,0 +1,29 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: postgres
+      POSTGRES_DB: rootslife_db
+    healthcheck:
+      test: pg_isready -U admin -d rootslife_db
+      interval: 5s
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+
+  webserver:
+    build: server
+    environment:
+      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: admin
+      POSTGRES_DB: rootslife_db
+      HOST: db
+      PORT: 5432
+    volumes:
+      - ./server:/app
+    ports:
+      - "5000:5000"
+    depends_on:
+      db:
+        condition: service_healthy
