@@ -2,12 +2,21 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask_restful import Resource, Api, reqparse, fields, marshal_with, abort
+import os
 
 app = Flask(__name__)
 cors = CORS(app, origins='*')
-app.config['SQLALCHEMY_DATABASE_URI'] ='sqlite:///database.db'
-db = SQLAlchemy(app)
 api = Api(app)
+
+user = os.getenv('POSTGRES_USER')
+password = os.getenv('POSTGRES_PASSWORD')
+port = os.getenv('PORT')
+db = os.getenv('POSTGRES_DB')
+host = os.getenv('HOST')
+
+postgres_url = f"postgresql://{user}:{password}@{host}:{port}/{db}"
+app.config['SQLALCHEMY_DATABASE_URI'] = postgres_url
+db = SQLAlchemy(app)
 
 class UserModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -80,10 +89,13 @@ class User(Resource):
 api.add_resource(Users, '/api/users/')
 api.add_resource(User, '/api/users/<int:id>')
 
+with app.app_context():
+   db.create_all()
+
 @app.route('/')
 def home():
-    return 'Flask REST API'
+    return 'Flask REST API checkit'
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=5000)
