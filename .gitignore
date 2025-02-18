@@ -23,5 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 
-*/venv
+.env
+venv
+postgres_data
 */__pycache__

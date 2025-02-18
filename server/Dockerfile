@@ -1,0 +1,15 @@
+FROM python:3.11-bookworm
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+ENV POSTGRES_USER=${POSTGRES_USER}
+ENV POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+ENV POSTGRES_DB=${POSTGRES_DB}
+ENV POSTGRES_HOST=${POSTGRES_HOST}
+ENV POSTGRES_PORT=${POSTGRES_PORT}
+
+EXPOSE 5000
+
+COPY run.py .
+CMD ["python", "run.py"]
