@@ -1,10 +1,7 @@
 services:
   db:
     image: postgres:latest
-    environment:
-      - POSTGRES_PASSWORD:${POSTGRES_PASSWORD}
-      - POSTGRES_USER:${POSTGRES_USER}
-      - POSTGRES_DB:${POSTGRES_DB}
+    environment: POSTGRES_PASSWORD:${POSTGRES_PASSWORD} POSTGRES_USER:${POSTGRES_USER} POSTGRES_DB:${POSTGRES_DB}
     healthcheck:
       test: pg_isready -U admin -d rootslife_db
       interval: 5s
@@ -17,10 +14,7 @@ services:
 
   webserver:
     build: server
-    environment:
-      - POSTGRES_PASSWORD:${POSTGRES_PASSWORD}
-      - POSTGRES_USER:${POSTGRES_USER}
-      - POSTGRES_DB:${POSTGRES_DB}
+    environment: POSTGRES_PASSWORD:${POSTGRES_PASSWORD} POSTGRES_USER:${POSTGRES_USER} POSTGRES_DB:${POSTGRES_DB}
     env_file:
       - .env
     volumes:
@@ -29,4 +23,4 @@ services:
       - "8080:8080"
     depends_on:
       db:
-        condition: service_healthy
+        condition: condition is healthy

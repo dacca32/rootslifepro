@@ -9,11 +9,13 @@ api = Api(user_bp)
 user_args = reqparse.RequestParser()
 user_args.add_argument('name', type=str, required=True, help='Name is required.')
 user_args.add_argument('email', type=str, required=True, help='Email is required.')
+user_args.add_argument('age', type=int, required=False)
 
 userFields = {
     'id': fields.Integer,
     'name': fields.String,
     'email': fields.String,
+    'age': fields.Integer
 }
 
 class Users(Resource):
@@ -25,7 +27,7 @@ class Users(Resource):
     @marshal_with(userFields)
     def post(self):
         args = user_args.parse_args()
-        user = User(name=args['name'], email=args['email'])
+        user = User(name=args['name'], email=args['email'], age=args['age'])
         db.session.add(user)
         db.session.commit()
         return user, 201
@@ -45,6 +47,7 @@ class UserResource(Resource):
         if user:
             user.name = args['name']
             user.email = args['email']
+            user.age = args['age']
             db.session.commit()
             return user
         else:
