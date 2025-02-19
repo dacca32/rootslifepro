@@ -2,6 +2,7 @@ alembic==1.14.1
 aniso8601==10.0.0
 blinker==1.9.0
 click==8.1.8
+coverage==7.6.12
 exceptiongroup==1.2.2
 Flask==3.1.0
 Flask-Cors==5.0.0
@@ -21,6 +22,7 @@ pluggy==1.5.0
 psycopg2==2.9.10
 PyJWT==2.10.1
 pytest==8.3.4
+pytest-cov==6.0.0
 python-dotenv==1.0.1
 pytz==2025.1
 six==1.17.0
