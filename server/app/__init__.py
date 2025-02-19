@@ -5,7 +5,6 @@ from .models import db
 from .views.auth_views import auth_bp, jwt, login_manager
 from .views.user_views import user_bp
 from config import Config
-import secrets
 
 def create_app():
     app = Flask(__name__)
