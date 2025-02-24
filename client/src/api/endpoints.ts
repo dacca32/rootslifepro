@@ -3,6 +3,8 @@
  * Centralized endpoint management for the application
  */
 
+import { User } from "../types";
+
 /**
  * User-related endpoints
  */

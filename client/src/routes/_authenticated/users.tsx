@@ -9,7 +9,7 @@ export const usersQueryOptions = (page: number, limit: number) => ({
     queryFn: () => UserService.getAll({ page, limit }),
 });
 
-export const Route = createFileRoute('/users/')({
+export const Route = createFileRoute('/_authenticated/users')({
     loader: () => queryClient.ensureQueryData(usersQueryOptions(1, 10)),
     component: UsersList
 });

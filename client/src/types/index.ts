@@ -21,6 +21,10 @@ export interface User extends BaseEntity {
     role: UserRole;
 }
 
+export interface UserLogin extends Omit<User, 'id' | 'createdAt' | 'updatedAt' | 'age' | 'role'> {
+    password: string
+}
+
 /**
  * User roles for authorization
  */

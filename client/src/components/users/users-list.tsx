@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { usersQueryOptions } from "../../routes/users";
+import { usersQueryOptions } from "../../routes/_authenticated/users";
 import { useQuery } from "@tanstack/react-query";
 import './users-list.css'
 

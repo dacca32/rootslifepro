@@ -38,11 +38,10 @@ def login():
     if user and user.check_password(password):
         login_user(user)
         access_token = create_access_token(identity=str(user.id))
-        return jsonify({'access_token': access_token}), 200
+        return jsonify({'token': access_token}), 200
     return jsonify({'message': 'Invalid credentials'}), 401
 
 @auth_bp.route('/logout', methods=['POST'])
-@jwt_required()
 def logout():
     logout_user()
     return jsonify({'message': 'Logged out successfully'}), 200
