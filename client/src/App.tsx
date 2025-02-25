@@ -12,7 +12,8 @@ const router = createRouter({
         queryClient
     },
     defaultPreload: 'intent',
-    defaultPreloadStaleTime: 0
+    defaultPreloadStaleTime: 0,
+    defaultNotFoundComponent: () => <div>Global app not found 404!</div>
 });
 
 declare module '@tanstack/react-router' {

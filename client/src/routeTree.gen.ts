@@ -11,22 +11,22 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as HomeImport } from './routes/home'
 import { Route as AuthenticatedImport } from './routes/_authenticated'
-import { Route as IndexImport } from './routes/index'
 import { Route as LoginIndexImport } from './routes/login/index'
 import { Route as AuthenticatedUsersImport } from './routes/_authenticated/users'
 import { Route as AuthenticatedSettingsImport } from './routes/_authenticated/settings'
 
 // Create/Update Routes
 
-const AuthenticatedRoute = AuthenticatedImport.update({
-  id: '/_authenticated',
+const HomeRoute = HomeImport.update({
+  id: '/home',
+  path: '/home',
   getParentRoute: () => rootRoute,
 } as any)
 
-const IndexRoute = IndexImport.update({
-  id: '/',
-  path: '/',
+const AuthenticatedRoute = AuthenticatedImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -52,18 +52,18 @@ const AuthenticatedSettingsRoute = AuthenticatedSettingsImport.update({
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
     '/_authenticated': {
       id: '/_authenticated'
       path: ''
       fullPath: ''
       preLoaderRoute: typeof AuthenticatedImport
+      parentRoute: typeof rootRoute
+    }
+    '/home': {
+      id: '/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof HomeImport
       parentRoute: typeof rootRoute
     }
     '/_authenticated/settings': {
@@ -107,16 +107,16 @@ const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
 )
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
   '': typeof AuthenticatedRouteWithChildren
+  '/home': typeof HomeRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/users': typeof AuthenticatedUsersRoute
   '/login': typeof LoginIndexRoute
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
   '': typeof AuthenticatedRouteWithChildren
+  '/home': typeof HomeRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/users': typeof AuthenticatedUsersRoute
   '/login': typeof LoginIndexRoute
@@ -124,8 +124,8 @@ export interface FileRoutesByTo {
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteWithChildren
+  '/home': typeof HomeRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/_authenticated/users': typeof AuthenticatedUsersRoute
   '/login/': typeof LoginIndexRoute
@@ -133,13 +133,13 @@ export interface FileRoutesById {
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '' | '/settings' | '/users' | '/login'
+  fullPaths: '' | '/home' | '/settings' | '/users' | '/login'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '' | '/settings' | '/users' | '/login'
+  to: '' | '/home' | '/settings' | '/users' | '/login'
   id:
     | '__root__'
-    | '/'
     | '/_authenticated'
+    | '/home'
     | '/_authenticated/settings'
     | '/_authenticated/users'
     | '/login/'
@@ -147,14 +147,14 @@ export interface FileRouteTypes {
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
   AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
+  HomeRoute: typeof HomeRoute
   LoginIndexRoute: typeof LoginIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
+  HomeRoute: HomeRoute,
   LoginIndexRoute: LoginIndexRoute,
 }
 
@@ -168,13 +168,10 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/",
         "/_authenticated",
+        "/home",
         "/login/"
       ]
-    },
-    "/": {
-      "filePath": "index.tsx"
     },
     "/_authenticated": {
       "filePath": "_authenticated.tsx",
@@ -182,6 +179,9 @@ export const routeTree = rootRoute
         "/_authenticated/settings",
         "/_authenticated/users"
       ]
+    },
+    "/home": {
+      "filePath": "home.tsx"
     },
     "/_authenticated/settings": {
       "filePath": "_authenticated/settings.tsx",
