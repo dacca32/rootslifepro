@@ -8,20 +8,7 @@ const NavbarComponent = () => {
     return (
         <div>
             <h1>nav</h1>
-            <ul>
-                <li>
-                    <Link to="/users">Users</Link>
-                </li>
-                <li>
-                    <Link to="/settings">Settings</Link>
-                </li>
-                <li>
-                    <button onClick={async () => {
-                        await AuthService.logoutUser();
-                        navigate({ to: '/login' });
-                    }}>Logout</button>
-                </li>
-            </ul>
+
         </div>
 
     )

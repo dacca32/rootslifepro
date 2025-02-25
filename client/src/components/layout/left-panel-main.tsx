@@ -6,31 +6,31 @@ import { useState } from "react";
 const navigation = [
     {
         name: 'Home',
-        to: '/',
+        to: '/home',
         icon: HomeIcon,
         current: true
     },
     {
         name: 'Calendar',
-        to: '/',
+        to: '/calendar',
         icon: CalendarIcon,
         current: false
     },
     {
         name: 'Food',
-        to: '/',
+        to: '/food',
         icon: FolderIcon,
         current: false
     },
     {
         name: 'Pics',
-        to: '/',
+        to: '/pics',
         icon: CameraIcon,
         current: false
     },
     {
         name: 'Documents',
-        to: '/',
+        to: '/documents',
         icon: DocumentDuplicateIcon,
         current: false
     }
@@ -94,11 +94,7 @@ const LeftPanelMain = () => {
                         {/* Sidebar component, swap this element with another sidebar if you like */}
                         <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-2">
                             <div className="flex h-16 shrink-0 items-center">
-                                <img
-                                    alt="Your Company"
-                                    src="https://tailwindui.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
-                                    className="h-8 w-auto"
-                                />
+                                <h2 className="font-bold text-blue-700">Rootslife</h2>
                             </div>
                             <nav className="flex flex-1 flex-col">
                                 <ul role="list" className="flex flex-1 flex-col gap-y-7">
@@ -169,11 +165,7 @@ const LeftPanelMain = () => {
                 {/* Sidebar component, swap this element with another sidebar if you like */}
                 <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6">
                     <div className="flex h-16 shrink-0 items-center">
-                        <img
-                            alt="Your Company"
-                            src="https://tailwindui.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
-                            className="h-8 w-auto"
-                        />
+                        <h2 className="font-bold text-blue-700">Rootslife</h2>
                     </div>
                     <nav className="flex flex-1 flex-col">
                         <ul role="list" className="flex flex-1 flex-col gap-y-7">
@@ -235,7 +227,7 @@ const LeftPanelMain = () => {
                             </li>
                             <li className="-mx-6 mt-auto">
                                 <Link
-                                    to="/"
+                                    to="/profile"
                                     className="flex items-center gap-x-4 px-6 py-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-50"
                                 >
                                     <img
@@ -244,20 +236,21 @@ const LeftPanelMain = () => {
                                         className="size-8 rounded-full bg-gray-50"
                                     />
                                     <span className="sr-only">Your profile</span>
-                                    <span aria-hidden="true">Tom Cook</span>
+                                    <span aria-hidden="true">{'{Logged in name}'}</span>
                                 </Link>
                             </li>
                         </ul>
                     </nav>
                 </div>
             </div>
+            {/* small screensheader section */}
             <div className="sticky top-0 z-40 flex items-center gap-x-6 bg-white px-4 py-4 shadow-sm sm:px-6 lg:hidden">
                 <button type="button" onClick={() => setSidebarOpen(true)} className="-m-2.5 p-2.5 text-gray-700 lg:hidden">
                     <span className="sr-only">Open sidebar</span>
                     <Bars3Icon aria-hidden="true" className="size-6" />
                 </button>
                 <div className="flex-1 text-sm/6 font-semibold text-gray-900">Dashboard</div>
-                <Link to="/">
+                <Link to="/profile">
                     <span className="sr-only">Your profile</span>
                     <img
                         alt=""

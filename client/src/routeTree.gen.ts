@@ -11,19 +11,18 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as HomeImport } from './routes/home'
 import { Route as AuthenticatedImport } from './routes/_authenticated'
 import { Route as LoginIndexImport } from './routes/login/index'
 import { Route as AuthenticatedUsersImport } from './routes/_authenticated/users'
 import { Route as AuthenticatedSettingsImport } from './routes/_authenticated/settings'
+import { Route as AuthenticatedProfileImport } from './routes/_authenticated/profile'
+import { Route as AuthenticatedPicsImport } from './routes/_authenticated/pics'
+import { Route as AuthenticatedHomeImport } from './routes/_authenticated/home'
+import { Route as AuthenticatedFoodImport } from './routes/_authenticated/food'
+import { Route as AuthenticatedDocumentsImport } from './routes/_authenticated/documents'
+import { Route as AuthenticatedCalendarImport } from './routes/_authenticated/calendar'
 
 // Create/Update Routes
-
-const HomeRoute = HomeImport.update({
-  id: '/home',
-  path: '/home',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const AuthenticatedRoute = AuthenticatedImport.update({
   id: '/_authenticated',
@@ -48,6 +47,42 @@ const AuthenticatedSettingsRoute = AuthenticatedSettingsImport.update({
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 
+const AuthenticatedProfileRoute = AuthenticatedProfileImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+
+const AuthenticatedPicsRoute = AuthenticatedPicsImport.update({
+  id: '/pics',
+  path: '/pics',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+
+const AuthenticatedHomeRoute = AuthenticatedHomeImport.update({
+  id: '/home',
+  path: '/home',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+
+const AuthenticatedFoodRoute = AuthenticatedFoodImport.update({
+  id: '/food',
+  path: '/food',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+
+const AuthenticatedDocumentsRoute = AuthenticatedDocumentsImport.update({
+  id: '/documents',
+  path: '/documents',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+
+const AuthenticatedCalendarRoute = AuthenticatedCalendarImport.update({
+  id: '/calendar',
+  path: '/calendar',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -59,12 +94,47 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedImport
       parentRoute: typeof rootRoute
     }
-    '/home': {
-      id: '/home'
+    '/_authenticated/calendar': {
+      id: '/_authenticated/calendar'
+      path: '/calendar'
+      fullPath: '/calendar'
+      preLoaderRoute: typeof AuthenticatedCalendarImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/documents': {
+      id: '/_authenticated/documents'
+      path: '/documents'
+      fullPath: '/documents'
+      preLoaderRoute: typeof AuthenticatedDocumentsImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/food': {
+      id: '/_authenticated/food'
+      path: '/food'
+      fullPath: '/food'
+      preLoaderRoute: typeof AuthenticatedFoodImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/home': {
+      id: '/_authenticated/home'
       path: '/home'
       fullPath: '/home'
-      preLoaderRoute: typeof HomeImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof AuthenticatedHomeImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/pics': {
+      id: '/_authenticated/pics'
+      path: '/pics'
+      fullPath: '/pics'
+      preLoaderRoute: typeof AuthenticatedPicsImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/profile': {
+      id: '/_authenticated/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AuthenticatedProfileImport
+      parentRoute: typeof AuthenticatedImport
     }
     '/_authenticated/settings': {
       id: '/_authenticated/settings'
@@ -93,11 +163,23 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface AuthenticatedRouteChildren {
+  AuthenticatedCalendarRoute: typeof AuthenticatedCalendarRoute
+  AuthenticatedDocumentsRoute: typeof AuthenticatedDocumentsRoute
+  AuthenticatedFoodRoute: typeof AuthenticatedFoodRoute
+  AuthenticatedHomeRoute: typeof AuthenticatedHomeRoute
+  AuthenticatedPicsRoute: typeof AuthenticatedPicsRoute
+  AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
   AuthenticatedUsersRoute: typeof AuthenticatedUsersRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedCalendarRoute: AuthenticatedCalendarRoute,
+  AuthenticatedDocumentsRoute: AuthenticatedDocumentsRoute,
+  AuthenticatedFoodRoute: AuthenticatedFoodRoute,
+  AuthenticatedHomeRoute: AuthenticatedHomeRoute,
+  AuthenticatedPicsRoute: AuthenticatedPicsRoute,
+  AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
   AuthenticatedUsersRoute: AuthenticatedUsersRoute,
 }
@@ -108,7 +190,12 @@ const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
 
 export interface FileRoutesByFullPath {
   '': typeof AuthenticatedRouteWithChildren
-  '/home': typeof HomeRoute
+  '/calendar': typeof AuthenticatedCalendarRoute
+  '/documents': typeof AuthenticatedDocumentsRoute
+  '/food': typeof AuthenticatedFoodRoute
+  '/home': typeof AuthenticatedHomeRoute
+  '/pics': typeof AuthenticatedPicsRoute
+  '/profile': typeof AuthenticatedProfileRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/users': typeof AuthenticatedUsersRoute
   '/login': typeof LoginIndexRoute
@@ -116,7 +203,12 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '': typeof AuthenticatedRouteWithChildren
-  '/home': typeof HomeRoute
+  '/calendar': typeof AuthenticatedCalendarRoute
+  '/documents': typeof AuthenticatedDocumentsRoute
+  '/food': typeof AuthenticatedFoodRoute
+  '/home': typeof AuthenticatedHomeRoute
+  '/pics': typeof AuthenticatedPicsRoute
+  '/profile': typeof AuthenticatedProfileRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/users': typeof AuthenticatedUsersRoute
   '/login': typeof LoginIndexRoute
@@ -125,7 +217,12 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_authenticated': typeof AuthenticatedRouteWithChildren
-  '/home': typeof HomeRoute
+  '/_authenticated/calendar': typeof AuthenticatedCalendarRoute
+  '/_authenticated/documents': typeof AuthenticatedDocumentsRoute
+  '/_authenticated/food': typeof AuthenticatedFoodRoute
+  '/_authenticated/home': typeof AuthenticatedHomeRoute
+  '/_authenticated/pics': typeof AuthenticatedPicsRoute
+  '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/_authenticated/users': typeof AuthenticatedUsersRoute
   '/login/': typeof LoginIndexRoute
@@ -133,13 +230,38 @@ export interface FileRoutesById {
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '' | '/home' | '/settings' | '/users' | '/login'
+  fullPaths:
+    | ''
+    | '/calendar'
+    | '/documents'
+    | '/food'
+    | '/home'
+    | '/pics'
+    | '/profile'
+    | '/settings'
+    | '/users'
+    | '/login'
   fileRoutesByTo: FileRoutesByTo
-  to: '' | '/home' | '/settings' | '/users' | '/login'
+  to:
+    | ''
+    | '/calendar'
+    | '/documents'
+    | '/food'
+    | '/home'
+    | '/pics'
+    | '/profile'
+    | '/settings'
+    | '/users'
+    | '/login'
   id:
     | '__root__'
     | '/_authenticated'
-    | '/home'
+    | '/_authenticated/calendar'
+    | '/_authenticated/documents'
+    | '/_authenticated/food'
+    | '/_authenticated/home'
+    | '/_authenticated/pics'
+    | '/_authenticated/profile'
     | '/_authenticated/settings'
     | '/_authenticated/users'
     | '/login/'
@@ -148,13 +270,11 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
-  HomeRoute: typeof HomeRoute
   LoginIndexRoute: typeof LoginIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
-  HomeRoute: HomeRoute,
   LoginIndexRoute: LoginIndexRoute,
 }
 
@@ -169,19 +289,45 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/_authenticated",
-        "/home",
         "/login/"
       ]
     },
     "/_authenticated": {
       "filePath": "_authenticated.tsx",
       "children": [
+        "/_authenticated/calendar",
+        "/_authenticated/documents",
+        "/_authenticated/food",
+        "/_authenticated/home",
+        "/_authenticated/pics",
+        "/_authenticated/profile",
         "/_authenticated/settings",
         "/_authenticated/users"
       ]
     },
-    "/home": {
-      "filePath": "home.tsx"
+    "/_authenticated/calendar": {
+      "filePath": "_authenticated/calendar.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/documents": {
+      "filePath": "_authenticated/documents.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/food": {
+      "filePath": "_authenticated/food.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/home": {
+      "filePath": "_authenticated/home.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/pics": {
+      "filePath": "_authenticated/pics.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/profile": {
+      "filePath": "_authenticated/profile.tsx",
+      "parent": "/_authenticated"
     },
     "/_authenticated/settings": {
       "filePath": "_authenticated/settings.tsx",
