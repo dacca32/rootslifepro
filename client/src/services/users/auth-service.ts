@@ -14,7 +14,7 @@ export default class AuthService {
     static async loginUser(User: UserLogin): Promise<User> {
         const response = await axiosClient.post(AuthEndpoints.login(), User);
         localStorage.setItem('token', response.data.token);
-        localStorage.setItem('role', 'User')
+        localStorage.setItem('userInfo', JSON.stringify(response.data.user));
         return response.data;
     }
 
@@ -25,7 +25,7 @@ export default class AuthService {
 
     static async logoutUser(): Promise<void> {
         localStorage.removeItem('token');
-        localStorage.removeItem('role');
+        localStorage.removeItem('userInfo');
         const response = await axiosClient.post(AuthEndpoints.logout());
         return response.data;
     }

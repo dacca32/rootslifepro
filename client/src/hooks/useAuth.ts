@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
-import { UserLogin, UserRole } from '../types';
+import { User, UserLogin, UserRole } from '../types';
 import AuthService from '../services/users/auth-service';
-import { useNavigate } from '@tanstack/react-router';
 
 type AuthInfo = {
     isAuthenticated: boolean,
@@ -17,7 +16,7 @@ export const useAuth = () => {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        const role = localStorage.getItem('role') as UserRole | null;
+        const role = localStorage.getItem("userInfo['role']") as UserRole | null;
 
         if (token && role) {
             setAuthInfo({
@@ -32,6 +31,20 @@ export const useAuth = () => {
         }
     }, []);
 
+    const userInfo = (): Omit<User, 'id'> | null => {
+        const userInfoString = localStorage.getItem('userInfo');
+        if (!userInfoString) {
+            return null;
+        }
+        try {
+            const userObject: Omit<User, 'id'> = JSON.parse(userInfoString);
+            return userObject;
+        } catch (error) {
+            console.error("Failed to parse user info:", error);
+            return null;
+        }
+    }
+
 
     const login = async (user: UserLogin) => {
         await AuthService.loginUser(user)
@@ -41,7 +54,7 @@ export const useAuth = () => {
         await AuthService.logoutUser()
     }
 
-    return { authInfo, login, logout };
+    return { authInfo, login, logout, userInfo };
 };
 
 export type AuthContext = ReturnType<typeof useAuth>

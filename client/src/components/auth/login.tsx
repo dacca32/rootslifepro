@@ -27,6 +27,7 @@ const LoginComponent: React.FC = () => {
                 token: tokenResponse.credential,
             });
             localStorage.setItem('token', res.data.token);
+            localStorage.setItem('userInfo', res.data.user);
             //   navigate('/');
         } catch (error) {
             console.error('Google login error', error);

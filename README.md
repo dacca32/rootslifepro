@@ -19,7 +19,7 @@ PSQL in the container
             );
 
     - Insert data eg.
-    INSERT INTO roles (role_name) VALUES ('Admin'), ('User), ('Guest');
+    INSERT INTO roles (role_name) VALUES ('Admin'), ('User'), ('Guest');
 
     - Add relationship column eg to users table
     ALTER TABLE "user" ADD COLUMN role_id INTEGER;

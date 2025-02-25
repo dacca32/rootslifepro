@@ -38,7 +38,7 @@ def login():
     if user and user.check_password(password):
         login_user(user)
         access_token = create_access_token(identity=str(user.id))
-        return jsonify({'token': access_token}), 200
+        return jsonify({'token': access_token, 'user': user.to_dict()}), 200
     return jsonify({'message': 'Invalid credentials'}), 401
 
 @auth_bp.route('/logout', methods=['POST'])
