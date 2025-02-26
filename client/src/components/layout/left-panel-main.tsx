@@ -55,6 +55,13 @@ const teams = [
     },
     {
         id: 3,
+        name: 'Walton Park',
+        to: '/',
+        initial: 'B',
+        current: false
+    },
+    {
+        id: 4,
         name: 'Middlesbrough',
         to: '/',
         initial: 'M',
@@ -70,12 +77,10 @@ function classNames(...classes: string[]) {
 const UserInfoPanel = () => {
     const { loggedInUser } = useAuth();
 
-    console.log('logged in user:', loggedInUser)
-
     return (
         <Link
             to="/profile"
-            className="flex items-center gap-x-4 px-6 py-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-50"
+            className="flex items-center gap-x-4 px-6 py-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-700 bg-indigo-950"
         >
             <img
                 alt=""
@@ -184,9 +189,9 @@ const LeftPanelMain = () => {
             {/* Static sidebar for desktop */}
             <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
                 {/* Sidebar component, swap this element with another sidebar if you like */}
-                <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6">
+                <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-400 bg-gray-900 px-6">
                     <div className="flex h-16 shrink-0 items-center">
-                        <h2 className="font-bold text-blue-700">Rootslife</h2>
+                        <h2 className="text-center text-2xl/9 font-bold tracking-tight text-gray-200">Rootslife<small className="text-[10px] font-light tracking-wide ml-2">v0.0.1</small></h2>
                     </div>
                     <nav className="flex flex-1 flex-col">
                         <ul role="list" className="flex flex-1 flex-col gap-y-7">
@@ -198,8 +203,8 @@ const LeftPanelMain = () => {
                                                 to={item.to}
                                                 className={classNames(
                                                     item.current
-                                                        ? 'bg-gray-50 text-indigo-600'
-                                                        : 'text-gray-700 hover:bg-gray-50 hover:text-indigo-600',
+                                                        ? 'bg-gray-800 text-indigo-600'
+                                                        : 'text-gray-700 hover:bg-gray-800 hover:text-indigo-600',
                                                     'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold',
                                                 )}
                                             >
@@ -217,7 +222,7 @@ const LeftPanelMain = () => {
                                 </ul>
                             </li>
                             <li>
-                                <div className="text-xs/6 font-semibold text-gray-400">Your teams</div>
+                                <div className="text-xs/6 font-semibold text-gray-400">Families</div>
                                 <ul role="list" className="-mx-2 mt-2 space-y-1">
                                     {teams.map((team) => (
                                         <li key={team.name}>
@@ -226,7 +231,7 @@ const LeftPanelMain = () => {
                                                 className={classNames(
                                                     team.current
                                                         ? 'bg-gray-50 text-indigo-600'
-                                                        : 'text-gray-700 hover:bg-gray-50 hover:text-indigo-600',
+                                                        : 'text-gray-700 hover:bg-gray-800 hover:text-indigo-600',
                                                     'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold',
                                                 )}
                                             >
@@ -234,8 +239,8 @@ const LeftPanelMain = () => {
                                                     className={classNames(
                                                         team.current
                                                             ? 'border-indigo-600 text-indigo-600'
-                                                            : 'border-gray-200 text-gray-400 group-hover:border-indigo-600 group-hover:text-indigo-600',
-                                                        'flex size-6 shrink-0 items-center justify-center rounded-lg border bg-white text-[0.625rem] font-medium',
+                                                            : 'border-gray-700 text-gray-400 group-hover:border-indigo-600 group-hover:text-indigo-600',
+                                                        'flex size-6 shrink-0 items-center justify-center rounded-lg border bg-gray-900 text-[0.625rem] font-medium',
                                                     )}
                                                 >
                                                     {team.initial}
