@@ -4,6 +4,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { TanStackRouterDevtools } from '@tanstack/router-devtools';
 import LeftPanelMain from '../components/layout/left-panel-main';
 import { AuthContextType, useAuth } from '../contexts/auth/auth-context';
+import HeaderComponent from '../components/layout/header';
 
 type RouterContext = {
     authentication: AuthContextType
@@ -39,23 +40,17 @@ function RootComponent() {
 
                     <div>
 
-                        <main className="lg:pl-72">
+                        <main className="lg:pl-72 h-screen">
                             <div>
-                                <div className="px-4 py-10 sm:px-6 lg:px-8 lg:py-6">
-                                    <div className="ml-auto">
-                                        <button onClick={async () => {
-                                            logout();
-                                            navigate({ to: '/home' });
-                                        }}>Logout
-                                        </button>
+                                <div>
+                                    <HeaderComponent></HeaderComponent>
+                                    <div className='p-12'>
+                                        <Outlet />
                                     </div>
-                                    <Outlet />
+
                                 </div>
                             </div>
                         </main>
-                        <aside className="fixed inset-y-0 left-72 hidden w-96 overflow-y-auto border-r border-gray-200 px-4 py-6 sm:px-6 lg:px-8 xl:d-none">
-                            SECONDARY AREA
-                        </aside>
                     </div>
                 </>
 

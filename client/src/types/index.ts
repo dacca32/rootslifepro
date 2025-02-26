@@ -16,9 +16,10 @@ export interface BaseEntity {
  */
 export interface User extends BaseEntity {
     email: string;
-    name: string;
+    first_name: string;
+    last_name: string;
     age: string;
-    role: UserRole;
+    role_id: UserRole;
 }
 
 export interface UserLogin {

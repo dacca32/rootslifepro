@@ -13,7 +13,6 @@ const S3ImageGallery = () => {
     const [imageUrls, setImageUrls] = useState<string[]>([]);
 
     useEffect(() => {
-        // Fetch image URLs from your API or use a hardcoded list for now
         const fetchImageUrls = async () => {
             try {
                 const imgs = await queryClient.ensureQueryData(S3ImagesQueryOptions())
