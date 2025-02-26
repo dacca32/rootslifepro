@@ -3,7 +3,6 @@
  * Centralized endpoint management for the application
  */
 
-import { User } from "../types";
 
 /**
  * User-related endpoints
@@ -44,3 +43,7 @@ export const AuthEndpoints = {
     /** Logout endpoint */
     logout: () => '/auth/logout',
 } as const;
+
+export const S3Endpoints = {
+    get_s3_images: () => '/get-images'
+} as const

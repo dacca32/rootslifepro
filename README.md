@@ -36,3 +36,9 @@ Migrations
 - docker exec into webserver
 - flask db migrate -m "message"
 - flask db upgrade
+
+
+Amazon S3 Cloud Storage
+
+- Username for AWS: rootslife (Uses encrypted password)
+- amzn-s3-rootslife-bucket

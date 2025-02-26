@@ -25,7 +25,7 @@ function RootComponent() {
             {!isAuthenticated && (
                 <div className="flex flex-wrap w-full min-h-screen">
                     <div className="w-full md:w-7/10 p-4">
-                        IMAGE WHETHER LOGIN OR SIGNUP
+                        @todo image
                     </div>
                     <div className="w-full md:w-[30%] bg-gray-900 p-4">
                         <Outlet />

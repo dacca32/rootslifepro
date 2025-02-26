@@ -16,7 +16,7 @@ import { Route as LoginIndexImport } from './routes/login/index'
 import { Route as AuthenticatedUsersImport } from './routes/_authenticated/users'
 import { Route as AuthenticatedSettingsImport } from './routes/_authenticated/settings'
 import { Route as AuthenticatedProfileImport } from './routes/_authenticated/profile'
-import { Route as AuthenticatedPicsImport } from './routes/_authenticated/pics'
+import { Route as AuthenticatedImagesImport } from './routes/_authenticated/images'
 import { Route as AuthenticatedHomeImport } from './routes/_authenticated/home'
 import { Route as AuthenticatedFoodImport } from './routes/_authenticated/food'
 import { Route as AuthenticatedDocumentsImport } from './routes/_authenticated/documents'
@@ -53,9 +53,9 @@ const AuthenticatedProfileRoute = AuthenticatedProfileImport.update({
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 
-const AuthenticatedPicsRoute = AuthenticatedPicsImport.update({
-  id: '/pics',
-  path: '/pics',
+const AuthenticatedImagesRoute = AuthenticatedImagesImport.update({
+  id: '/images',
+  path: '/images',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 
@@ -122,11 +122,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedHomeImport
       parentRoute: typeof AuthenticatedImport
     }
-    '/_authenticated/pics': {
-      id: '/_authenticated/pics'
-      path: '/pics'
-      fullPath: '/pics'
-      preLoaderRoute: typeof AuthenticatedPicsImport
+    '/_authenticated/images': {
+      id: '/_authenticated/images'
+      path: '/images'
+      fullPath: '/images'
+      preLoaderRoute: typeof AuthenticatedImagesImport
       parentRoute: typeof AuthenticatedImport
     }
     '/_authenticated/profile': {
@@ -167,7 +167,7 @@ interface AuthenticatedRouteChildren {
   AuthenticatedDocumentsRoute: typeof AuthenticatedDocumentsRoute
   AuthenticatedFoodRoute: typeof AuthenticatedFoodRoute
   AuthenticatedHomeRoute: typeof AuthenticatedHomeRoute
-  AuthenticatedPicsRoute: typeof AuthenticatedPicsRoute
+  AuthenticatedImagesRoute: typeof AuthenticatedImagesRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
   AuthenticatedUsersRoute: typeof AuthenticatedUsersRoute
@@ -178,7 +178,7 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedDocumentsRoute: AuthenticatedDocumentsRoute,
   AuthenticatedFoodRoute: AuthenticatedFoodRoute,
   AuthenticatedHomeRoute: AuthenticatedHomeRoute,
-  AuthenticatedPicsRoute: AuthenticatedPicsRoute,
+  AuthenticatedImagesRoute: AuthenticatedImagesRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
   AuthenticatedUsersRoute: AuthenticatedUsersRoute,
@@ -194,7 +194,7 @@ export interface FileRoutesByFullPath {
   '/documents': typeof AuthenticatedDocumentsRoute
   '/food': typeof AuthenticatedFoodRoute
   '/home': typeof AuthenticatedHomeRoute
-  '/pics': typeof AuthenticatedPicsRoute
+  '/images': typeof AuthenticatedImagesRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/users': typeof AuthenticatedUsersRoute
@@ -207,7 +207,7 @@ export interface FileRoutesByTo {
   '/documents': typeof AuthenticatedDocumentsRoute
   '/food': typeof AuthenticatedFoodRoute
   '/home': typeof AuthenticatedHomeRoute
-  '/pics': typeof AuthenticatedPicsRoute
+  '/images': typeof AuthenticatedImagesRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/users': typeof AuthenticatedUsersRoute
@@ -221,7 +221,7 @@ export interface FileRoutesById {
   '/_authenticated/documents': typeof AuthenticatedDocumentsRoute
   '/_authenticated/food': typeof AuthenticatedFoodRoute
   '/_authenticated/home': typeof AuthenticatedHomeRoute
-  '/_authenticated/pics': typeof AuthenticatedPicsRoute
+  '/_authenticated/images': typeof AuthenticatedImagesRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/_authenticated/users': typeof AuthenticatedUsersRoute
@@ -236,7 +236,7 @@ export interface FileRouteTypes {
     | '/documents'
     | '/food'
     | '/home'
-    | '/pics'
+    | '/images'
     | '/profile'
     | '/settings'
     | '/users'
@@ -248,7 +248,7 @@ export interface FileRouteTypes {
     | '/documents'
     | '/food'
     | '/home'
-    | '/pics'
+    | '/images'
     | '/profile'
     | '/settings'
     | '/users'
@@ -260,7 +260,7 @@ export interface FileRouteTypes {
     | '/_authenticated/documents'
     | '/_authenticated/food'
     | '/_authenticated/home'
-    | '/_authenticated/pics'
+    | '/_authenticated/images'
     | '/_authenticated/profile'
     | '/_authenticated/settings'
     | '/_authenticated/users'
@@ -299,7 +299,7 @@ export const routeTree = rootRoute
         "/_authenticated/documents",
         "/_authenticated/food",
         "/_authenticated/home",
-        "/_authenticated/pics",
+        "/_authenticated/images",
         "/_authenticated/profile",
         "/_authenticated/settings",
         "/_authenticated/users"
@@ -321,8 +321,8 @@ export const routeTree = rootRoute
       "filePath": "_authenticated/home.tsx",
       "parent": "/_authenticated"
     },
-    "/_authenticated/pics": {
-      "filePath": "_authenticated/pics.tsx",
+    "/_authenticated/images": {
+      "filePath": "_authenticated/images.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/profile": {

@@ -1,5 +1,5 @@
 import { DialogPanel, Dialog, DialogBackdrop, TransitionChild } from "@headlessui/react";
-import { Bars3Icon, CalendarIcon, CameraIcon, DocumentDuplicateIcon, FolderIcon, HomeIcon, UsersIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, CalendarIcon, CameraIcon, CogIcon, DocumentDuplicateIcon, FolderIcon, HomeIcon, UserGroupIcon, UsersIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { useAuth } from "../../contexts/auth/auth-context";
@@ -18,21 +18,21 @@ const navigation = [
         current: false
     },
     {
-        name: 'Food',
-        to: '/food',
-        icon: FolderIcon,
+        name: 'Users',
+        to: '/users',
+        icon: UserGroupIcon,
         current: false
     },
     {
-        name: 'Pics',
-        to: '/pics',
+        name: 'Images',
+        to: '/images',
         icon: CameraIcon,
         current: false
     },
     {
-        name: 'Documents',
-        to: '/documents',
-        icon: DocumentDuplicateIcon,
+        name: 'Settings',
+        to: '/settings',
+        icon: CogIcon,
         current: false
     }
 ]
