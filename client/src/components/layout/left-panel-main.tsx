@@ -2,8 +2,7 @@ import { DialogPanel, Dialog, DialogBackdrop, TransitionChild } from "@headlessu
 import { Bars3Icon, CalendarIcon, CameraIcon, DocumentDuplicateIcon, FolderIcon, HomeIcon, UsersIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { useAuth } from "../../hooks/useAuth";
-import { User } from "../../types";
+import { useAuth } from "../../contexts/auth/auth-context";
 
 const navigation = [
     {
@@ -69,8 +68,7 @@ function classNames(...classes: string[]) {
 }
 
 const UserInfoPanel = () => {
-    const { userInfo } = useAuth();
-    const user = userInfo();
+    const { loggedInUser } = useAuth();
 
     return (
         <Link
@@ -83,7 +81,7 @@ const UserInfoPanel = () => {
                 className="size-8 rounded-full bg-gray-50"
             />
             <span className="sr-only">Your profile</span>
-            <span aria-hidden="true">{user?.name}</span>
+            <span aria-hidden="true">{loggedInUser?.name}</span>
         </Link>
     )
 }

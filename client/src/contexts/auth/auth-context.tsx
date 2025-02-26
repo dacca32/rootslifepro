@@ -1,45 +1,43 @@
-import React, { createContext, useState, ReactNode } from 'react';
-import axios from 'axios';
-import { jwtDecode } from 'jwt-decode';
+import React, { createContext, useState, useContext, ReactNode } from 'react';
+import { User } from '../../types';
 
-interface AuthContextType {
-    auth: AuthState | null;
-    login: (username: string, password: string) => Promise<void>;
+export interface AuthContextType {
+    isAuthenticated: boolean;
+    loggedInUser: User | undefined,
+    login: ({ token, user }: { token: string, user: User }) => void;
     logout: () => void;
-}
-
-interface AuthState {
-    access_token: string;
-    user: any;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [auth, setAuth] = useState<AuthState | null>(null);
+    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+    const [loggedInUser, setLoggedInUser] = useState<User>()
 
-    const login = async (username: string, password: string) => {
-        try {
-            const response = await axios.post('http://localhost:5000/login', { username, password });
-            const { access_token } = response.data;
-            const decoded = jwtDecode(access_token);
-            setAuth({ access_token, user: decoded });
-            localStorage.setItem('access_token', access_token);
-        } catch (error) {
-            console.error('Login failed:', error);
-        }
+    const login = (sessionData: { token: string, user: User }) => {
+        localStorage.setItem('token', sessionData.token);
+        localStorage.setItem('user', JSON.stringify(sessionData.user));
+        setLoggedInUser(sessionData.user)
+        setIsAuthenticated(true);
     };
 
     const logout = () => {
-        setAuth(null);
-        localStorage.removeItem('access_token');
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        setIsAuthenticated(false);
     };
 
     return (
-        <AuthContext.Provider value={{ auth, login, logout }}>
+        <AuthContext.Provider value={{ isAuthenticated, login, logout, loggedInUser }}>
             {children}
         </AuthContext.Provider>
     );
 };
 
-export default AuthContext;
+export const useAuth = (): AuthContextType => {
+    const context = useContext(AuthContext);
+    if (!context) {
+        throw new Error('useAuth must be used within an AuthProvider');
+    }
+    return context;
+};

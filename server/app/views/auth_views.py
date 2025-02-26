@@ -15,14 +15,15 @@ def load_user(user_id):
 @auth_bp.route('/register', methods=['POST'])
 def register():
     data = request.get_json()
-    name = data.get('name')
+    first_name = data.get('firstName')
+    last_name = data.get('lastName')
     email = data.get('email')
     password = data.get('password')
 
-    if User.query.filter_by(name=name).first() or User.query.filter_by(email=email).first():
+    if User.query.filter_by(email=email).first():
         return jsonify({'message': 'User already exists'}), 400
 
-    user = User(name=name, email=email)
+    user = User(email=email, first_name=first_name, last_name=last_name, role_id=2)
     user.set_password(password)
     db.session.add(user)
     db.session.commit()
@@ -31,9 +32,9 @@ def register():
 @auth_bp.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
-    name = data.get('name')
+    email = data.get('email')
     password = data.get('password')
-    user = User.query.filter_by(name=name).first()
+    user = User.query.filter_by(email=email).first()
 
     if user and user.check_password(password):
         login_user(user)

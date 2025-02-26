@@ -1,5 +1,6 @@
 import axiosClient from '../../api/axios-client';
 import { AuthEndpoints } from '../../api/endpoints';
+import { useAuth } from '../../contexts/auth/auth-context';
 import { User, UserLogin } from '../../types';
 
 /**
@@ -9,23 +10,20 @@ export default class AuthService {
 
     /**
      * Login function
-     * @returns Promise with an access token
+     * @returns Promise
      */
-    static async loginUser(User: UserLogin): Promise<User> {
+    static async loginUser(User: UserLogin): Promise<{ token: string, user: User }> {
+
         const response = await axiosClient.post(AuthEndpoints.login(), User);
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('userInfo', JSON.stringify(response.data.user));
         return response.data;
     }
 
     /**
      * Logout function
-     * @returns void {removes token from local storage}
+     * @returns void
      */
 
     static async logoutUser(): Promise<void> {
-        localStorage.removeItem('token');
-        localStorage.removeItem('userInfo');
         const response = await axiosClient.post(AuthEndpoints.logout());
         return response.data;
     }

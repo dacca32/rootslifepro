@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "@tanstack/react-router";
-import AuthService from "../../services/users/auth-service";
+import AuthService from "../../services/auth/auth-service";
 
 const NavbarComponent = () => {
 
