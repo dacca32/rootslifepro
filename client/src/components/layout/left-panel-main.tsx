@@ -70,6 +70,8 @@ function classNames(...classes: string[]) {
 const UserInfoPanel = () => {
     const { loggedInUser } = useAuth();
 
+    console.log('logged in user:', loggedInUser)
+
     return (
         <Link
             to="/profile"
@@ -81,7 +83,7 @@ const UserInfoPanel = () => {
                 className="size-8 rounded-full bg-gray-50"
             />
             <span className="sr-only">Your profile</span>
-            <span aria-hidden="true">{loggedInUser?.name}</span>
+            <span aria-hidden="true">{loggedInUser?.email}</span>
         </Link>
     )
 }

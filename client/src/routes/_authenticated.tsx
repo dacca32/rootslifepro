@@ -5,10 +5,10 @@ export const Route = createFileRoute('/_authenticated')({
 
         const isAuthenticated = context.authentication.isAuthenticated;
 
-        // if (!isAuthenticated) {
-        //     throw redirect({
-        //         to: '/login'
-        //     })
-        // }
+        if (!isAuthenticated) {
+            throw redirect({
+                to: '/login'
+            })
+        }
     },
 })

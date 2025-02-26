@@ -1,6 +1,5 @@
 import axiosClient from '../../api/axios-client';
 import { AuthEndpoints } from '../../api/endpoints';
-import { useAuth } from '../../contexts/auth/auth-context';
 import { User, UserLogin } from '../../types';
 
 /**
