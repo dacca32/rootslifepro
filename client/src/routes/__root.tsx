@@ -17,13 +17,16 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 function RootComponent() {
 
     const navigate = useNavigate();
-    const { logout } = useAuth();
+    const { logout, isAuthenticated } = useAuth();
 
     return (
         <>
 
-            <div>
+            {isAuthenticated && (
                 <LeftPanelMain></LeftPanelMain>
+            )}
+
+            <div>
 
                 <main className="lg:pl-72">
                     <div>
@@ -31,7 +34,7 @@ function RootComponent() {
                             <div className="ml-auto">
                                 <button onClick={async () => {
                                     logout();
-                                    navigate({ to: '/login' });
+                                    navigate({ to: '/home' });
                                 }}>Logout
                                 </button>
                             </div>
