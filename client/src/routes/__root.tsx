@@ -17,8 +17,7 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 
 function RootComponent() {
 
-    const navigate = useNavigate();
-    const { logout, isAuthenticated } = useAuth();
+    const { isAuthenticated } = useAuth();
 
     return (
         <>
