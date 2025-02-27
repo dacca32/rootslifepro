@@ -13,11 +13,7 @@ const HeaderComponent = () => {
             <div className="flex items-start space-x-5">
                 <div className="shrink-0">
                     <div className="relative">
-                        <img
-                            alt=""
-                            src="https://amzn-s3-rootslife-bucket.s3.amazonaws.com/amelia.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA3ISBWACFOPJCYSCM%2F20250226%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Date=20250226T162221Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=f9c6d296af107cba658cafef0cd1d4b0ed14f7f88b6a54332908e10c69f5d26e"
-                            className="size-16 rounded-full"
-                        />
+
                         <span aria-hidden="true" className="absolute inset-0 rounded-full shadow-inner" />
                     </div>
                 </div>
