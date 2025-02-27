@@ -1,11 +1,21 @@
 import axiosClient from '../../api/axios-client';
 import { AuthEndpoints } from '../../api/endpoints';
+import { RegisterFormInputs } from '../../components/auth/register';
 import { User, UserLogin } from '../../types';
 
 /**
  * Service class for handling User-related API calls
  */
 export default class AuthService {
+
+    /**
+  * Register function
+  * @returns Promise
+  */
+    static async registerUser(User: RegisterFormInputs): Promise<{ firstName: string, lastName: string, email: string, password: string }> {
+        const response = await axiosClient.post(AuthEndpoints.register(), User);
+        return response.data;
+    }
 
     /**
      * Login function

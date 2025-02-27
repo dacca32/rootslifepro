@@ -1,15 +1,22 @@
 import { DialogPanel, Dialog, DialogBackdrop, TransitionChild } from "@headlessui/react";
 import { Bars3Icon, CalendarIcon, CameraIcon, CogIcon, DocumentDuplicateIcon, FolderIcon, HomeIcon, UserGroupIcon, UsersIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Link } from "@tanstack/react-router";
+import { Link } from '@tanstack/react-router';
 import { useState } from "react";
 import { useAuth } from "../../contexts/auth/auth-context";
 
-const navigation = [
+type NavigationItem = {
+    name: string;
+    to: string;
+    icon: React.ForwardRefExoticComponent<Omit<React.SVGProps<SVGSVGElement>, "ref">>
+    current: boolean;
+}
+
+const navigation: NavigationItem[] = [
     {
         name: 'Home',
         to: '/home',
         icon: HomeIcon,
-        current: true
+        current: false
     },
     {
         name: 'Calendar',
@@ -75,6 +82,8 @@ function classNames(...classes: string[]) {
 }
 
 const UserInfoPanel = () => {
+
+
     const { loggedInUser } = useAuth();
 
     return (
@@ -95,6 +104,12 @@ const UserInfoPanel = () => {
 const LeftPanelMain = () => {
 
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [active, setActive] = useState<boolean>(false);
+
+    const handleClick = (evt: any) => {
+        console.log(evt)
+
+    }
 
 
     return (
@@ -201,6 +216,9 @@ const LeftPanelMain = () => {
                                         <li key={item.name}>
                                             <Link
                                                 to={item.to}
+                                                activeProps={{
+                                                    className: "bg-gray-800 text-indigo-600"
+                                                }}
                                                 className={classNames(
                                                     item.current
                                                         ? 'bg-gray-800 text-indigo-600'
