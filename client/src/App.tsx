@@ -1,25 +1,36 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { createRouter, RouterProvider } from "@tanstack/react-router";
+import { routeTree } from "./routeTree.gen";
+import { useAuth } from "./contexts/auth/auth-context";
 
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+const queryClient = new QueryClient();
 
-function App() {
-  // const [count, setCount] = useState(0)
+const router = createRouter({
+    routeTree,
+    context: {
+        authentication: undefined!,
+        queryClient
+    },
+    defaultPreload: 'intent',
+    defaultPreloadStaleTime: 0,
+    defaultNotFoundComponent: () => <div>Global app not found 404!</div>
+});
 
-  // const fetchApi = async () => {
-  //   const response = await axios.get('http://localhost:8080/api/users')
-  //   console.log(response.data.users)
-  // }
-  // useEffect(() => {
-  //   fetchApi()
-  // }, [])
-
-
-  return (
-    <>
-      <h1>Rootslife home page</h1>
-    </>
-  )
+declare module '@tanstack/react-router' {
+    interface Register {
+        router: typeof router;
+    }
 }
 
-export default App
+function App() {
+
+    const authentication = useAuth();
+
+    return (
+        <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router} context={{ authentication, queryClient }} />
+        </QueryClientProvider>
+    )
+}
+
+export default App;

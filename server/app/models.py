@@ -3,12 +3,21 @@ from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 db = SQLAlchemy()
 
-class User(db.Model, UserMixin):
+class Role(db.Model):
+    __tablename__ = 'roles'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), unique=True, nullable=False)
+    role_name = db.Column(db.String(50), unique=True, nullable=False)
+    users = db.relationship('User', backref='role', lazy=True)
+
+class User(db.Model, UserMixin):
+    __tablename__ = 'users'
+    id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(120), unique=False, nullable=False)
+    last_name = db.Column(db.String(120), unique=False, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password_hash = db.Column(db.String(216), nullable=False)
     age = db.Column(db.Integer)
+    role_id = db.Column(db.Integer, db.ForeignKey('roles.id'), nullable=False)
 
     def set_password(self,password):
         self.password_hash = generate_password_hash(password)
@@ -20,7 +29,9 @@ class User(db.Model, UserMixin):
     def to_dict(self):
         return {
             'id': self.id,
-            'name': self.name,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
             'email': self.email,
-            'age': self.age
+            'age': self.age,
+            'role_id': self.role_id
         }

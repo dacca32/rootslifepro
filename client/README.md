@@ -48,3 +48,18 @@ export default tseslint.config({
   },
 })
 ```
+
+Folder structure
+
+main.js or main.tsx: The entry point for React application, where the root component (App) is rendered.
+App.js or App.tsx: The main App component that acts as the root of the component tree.
+components/: Reusable UI components.
+pages/: Components representing different pages or views in the application.
+hooks/: Custom React hooks used across the application.
+contexts/: Context providers for managing global state using React's Context API.
+redux/: If you're using Redux for state management.
+services/: API calls and other business logic.
+utils/: Utility functions and helper methods.
+assets/: Static assets like images, fonts, and icons.
+styles/: Global styles, themes, or variables.
+tests/: End-to-end and integration tests (optional).
