@@ -1,6 +1,6 @@
 name: rootslife-app
 services:
-  postgres:
+  db:
     image: postgres:latest
     ports:
       - "5432:5432"
@@ -12,38 +12,46 @@ services:
   api:
     build:
       context: ./server
-      target: production
+      target: development
     restart: unless-stopped
     env_file: ./server/.env
+    volumes:
+      - ./server:/app
+      - ./server/node_modules:/app/node_modules
     ports:
-      - "8000:8000"
+      - "5000:5000"
+    links:
+      - db:db
     networks:
       - rootslife-app
     depends_on:
-      - postgres
+      - db
 
   frontend:
     build:
       context: ./client
-      target: production
+      target: development
       args:
-        VITE_API_URL: https://api.${DOMAIN_NAME}
+        VITE_API_URL: https://api.auth.localhost
     restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./client:/app
+      - ./client/node_modules:/app/node_modules
     networks:
       - rootslife-app
+    command: npm run dev -- --host
     depends_on:
       - api
 
   caddy:
-    build:
-      context: ./caddy
-      dockerfile: dockerfile
+    image: caddy:2-alpine
     ports:
       - 80:80
       - 443:443
-    environment:
-      - DOMAIN_NAME=${DOMAIN_NAME}
     volumes:
+      - ./caddy/Caddyfile.dev:/etc/caddy/Caddyfile
       - caddy_data:/data
       - caddy_config:/config
     networks:

@@ -21,7 +21,7 @@ const UsersList: FunctionComponent = () => {
             <div className="user-grid">
                 {users.map((user) => (
                     <div key={user.id} className="user-card">
-                        <h3>{user.name}</h3>
+                        <h3>{user.first_name}</h3>
                         <p>Description here ...</p>
                         <div className="user-details">
                             <span>Email: {user.email}</span>

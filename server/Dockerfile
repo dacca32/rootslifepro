@@ -1,15 +1,21 @@
-FROM python:3.11-bookworm
+# Base stage
+FROM python:3.11-bookworm AS base
 WORKDIR /app
 COPY requirements.txt .
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
+# Set environment variables - check this
+ENV FLASK_APP=run.py
+# Default command to run the Flask application
+CMD ["flask", "run", "--host=0.0.0.0"]
 
-ENV POSTGRES_USER=${POSTGRES_USER}
-ENV POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-ENV POSTGRES_DB=${POSTGRES_DB}
-ENV POSTGRES_HOST=${POSTGRES_HOST}
-ENV POSTGRES_PORT=${POSTGRES_PORT}
+# Development stage
+FROM base AS development
+ENV FLASK_ENV=development
+RUN pip install --no-cache-dir -r requirements-dev.txt
 
-EXPOSE 5000
-
-COPY run.py .
-CMD ["python", "run.py"]
+# Production stage
+FROM base AS production
+ENV FLASK_ENV=production
+RUN pip install --no-cache-dir gunicorn
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "app:app"]

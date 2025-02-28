@@ -2,7 +2,6 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod'
 import AuthService from '../../services/auth/auth-service';
-import { useAuth } from '../../contexts/auth/auth-context';
 import { Link, useNavigate } from '@tanstack/react-router';
 
 // Define the validation schema using Zod

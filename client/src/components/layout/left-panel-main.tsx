@@ -1,5 +1,5 @@
 import { DialogPanel, Dialog, DialogBackdrop, TransitionChild } from "@headlessui/react";
-import { Bars3Icon, CalendarIcon, CameraIcon, CogIcon, DocumentDuplicateIcon, FolderIcon, HomeIcon, UserGroupIcon, UsersIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, CalendarIcon, CameraIcon, CogIcon, HomeIcon, UserGroupIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from '@tanstack/react-router';
 import { useState } from "react";
 import { useAuth } from "../../contexts/auth/auth-context";
@@ -104,12 +104,6 @@ const UserInfoPanel = () => {
 const LeftPanelMain = () => {
 
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const [active, setActive] = useState<boolean>(false);
-
-    const handleClick = (evt: any) => {
-        console.log(evt)
-
-    }
 
 
     return (

@@ -1,6 +1,5 @@
 import { QueryClient, QueryCache, MutationCache, QueryKey } from '@tanstack/react-query';
 import { toast } from 'react-toastify'
-import { ApiError } from '../types';
 
 interface QueryMeta {
     successMessage?: string;
