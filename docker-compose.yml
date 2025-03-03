@@ -30,8 +30,6 @@ services:
     build:
       context: ./client
       target: production
-      args:
-        VITE_API_URL: http://localhost
     restart: always
     ports:
       - "3000:3000"
