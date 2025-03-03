@@ -17,6 +17,8 @@ RUN VITE_API_URL=${VITE_API_URL}
 
 RUN npm run build
 
+EXPOSE 3000
+
 # Set the command to run the app
 CMD ["npm", "run", "dev"]
 

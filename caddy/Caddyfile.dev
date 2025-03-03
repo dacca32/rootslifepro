@@ -2,11 +2,11 @@
     local_certs
 }
 
-auth.localhost {
+localhost:3000 {
     encode gzip
     reverse_proxy frontend:5173
 }
 
-api.auth.localhost {
+localhost:5000/api/ {
     reverse_proxy api:4004
 }
