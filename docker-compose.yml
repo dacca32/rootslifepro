@@ -1,7 +1,8 @@
 name: rootslife-app
 services:
-  postgres:
+  db:
     image: postgres:latest
+    restart: always
     ports:
       - "5432:5432"
     volumes:
@@ -23,7 +24,7 @@ services:
     networks:
       - rootslife-app
     depends_on:
-      - postgres
+      - db
 
   frontend:
     build:
