@@ -30,7 +30,7 @@ services:
       context: ./client
       target: production
       args:
-        VITE_API_URL: http://${DOMAIN_NAME}
+        VITE_API_URL: http://localhost
     restart: always
     ports:
       - "3000:3000"
@@ -39,7 +39,7 @@ services:
       - ./client/node_modules:/app/node_modules
     networks:
       - rootslife-app
-    command: npm run build
+    command: caddy run --config /etc/caddy/Caddyfile
     depends_on:
       - api
 
