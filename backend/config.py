@@ -4,9 +4,11 @@ from dotenv import load_dotenv
 # Load environment variables from .env file
 load_dotenv()
 
-class Config:
+class Config():
     SECRET_KEY = os.getenv('SECRET_KEY')
     JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY')
+    FLASK_ENV = os.getenv('FLASK_ENV')
+    DEBUG = os.getenv('DEBUG')
     POSTGRES_USER = os.getenv('POSTGRES_USER')
     POSTGRES_PASSWORD = os.getenv('POSTGRES_PASSWORD')
     POSTGRES_DB = os.getenv('POSTGRES_DB')
@@ -15,16 +17,10 @@ class Config:
     SQLALCHEMY_DATABASE_URI = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    # Debug prints to verify environment variables
-    # print("POSTGRES_USER:", POSTGRES_USER)
-    # print("POSTGRES_PASSWORD:", POSTGRES_PASSWORD)
-    # print("POSTGRES_DB:", POSTGRES_DB)
-    # print("POSTGRES_HOST:", POSTGRES_HOST)
-    # print("POSTGRES_PORT:", POSTGRES_PORT)
-    # print("SQLALCHEMY_DATABASE_URI:", SQLALCHEMY_DATABASE_URI)
 
 class DevelopmentConfig(Config):
     DEBUG = True
 
 class ProductionConfig(Config):
     DEBUG = False
+    FLASK_ENV = 'production'

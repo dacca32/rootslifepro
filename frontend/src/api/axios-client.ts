@@ -16,7 +16,7 @@ const STORAGE_KEYS = {
 export const axiosClient: AxiosInstance = (() => {
 
     return axios.create({
-        baseURL: 'http://localhost:8080/api',
+        baseURL: 'http://localhost:5000/api',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',

@@ -3,13 +3,11 @@ aniso8601
 blinker
 boto3
 botocore
-s3transfer
-urllib3
 click
 coverage
 exceptiongroup
 Flask
-Flask-Cors
+flask-cors
 Flask-JWT-Extended
 Flask-Login
 Flask-Migrate
@@ -35,8 +33,10 @@ pytest-cov
 python-dateutil
 python-dotenv
 pytz
+s3transfer
 six
 SQLAlchemy
 tomli
 typing_extensions
+urllib3
 Werkzeug

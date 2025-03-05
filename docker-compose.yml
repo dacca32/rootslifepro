@@ -1,52 +1,44 @@
 services:
 
+  db:
+    image: postgres:17.4-bullseye
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./scripts:/docker-entrypoint-initdb.d
+      - ./postgres_data:/postgres_data
+    env_file:
+      - ./env_vars/postgres.env
+    networks:
+      - rootslife
+  
+  backend:
+    build:
+      context: ./backend 
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./env_vars/postgres.env
+    volumes:
+      - ./backend:/app
+    networks:
+      - rootslife
+    depends_on:
+      - db
+
   frontend:
     build:
-      context: ./client
+      context: ./frontend
     ports:
       - "3000:3000"
     networks:
       - rootslife
     volumes:
-      - ./client:/app
+      - ./frontend:/app
       - /app/node_modules
-    depends_on:
-      - backend
-
-  db:
-    image: postgres:latest
-    ports:
-      - "5432:5432"
-    volumes:
-      - ./postgres_data:/postgres_data
-    env_file:
-      - .env
-    environment:
-      - POSTGRES_PASSWORD:${POSTGRES_PASSWORD}
-      - POSTGRES_USER:${POSTGRES_USER}
-      - POSTGRES_DB:${POSTGRES_DB}
-    networks:
-      - rootslife
       
-  backend:
-    build:
-      context: ./server
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-    env_file:
-      - .env
-    environment:
-      - POSTGRES_PASSWORD:${POSTGRES_PASSWORD}
-      - POSTGRES_USER:${POSTGRES_USER}
-      - POSTGRES_DB:${POSTGRES_DB}
-      - POSTGRES_HOST:${POSTGRES_HOST}
-    volumes:
-      - ./server:/app
-    networks:
-      - rootslife
-    depends_on:
-      - db
+  
 
 networks:
   rootslife:
