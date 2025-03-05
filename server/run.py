@@ -1,5 +1,7 @@
 from app import create_app
 
+print("Starting Flask application...")
+
 app = create_app()
 
 @app.route('/')

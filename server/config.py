@@ -16,12 +16,12 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Debug prints to verify environment variables
-    print("POSTGRES_USER:", POSTGRES_USER)
-    print("POSTGRES_PASSWORD:", POSTGRES_PASSWORD)
-    print("POSTGRES_DB:", POSTGRES_DB)
-    print("POSTGRES_HOST:", POSTGRES_HOST)
-    print("POSTGRES_PORT:", POSTGRES_PORT)
-    print("SQLALCHEMY_DATABASE_URI:", SQLALCHEMY_DATABASE_URI)
+    # print("POSTGRES_USER:", POSTGRES_USER)
+    # print("POSTGRES_PASSWORD:", POSTGRES_PASSWORD)
+    # print("POSTGRES_DB:", POSTGRES_DB)
+    # print("POSTGRES_HOST:", POSTGRES_HOST)
+    # print("POSTGRES_PORT:", POSTGRES_PORT)
+    # print("SQLALCHEMY_DATABASE_URI:", SQLALCHEMY_DATABASE_URI)
 
 class DevelopmentConfig(Config):
     DEBUG = True

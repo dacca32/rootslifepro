@@ -14,8 +14,9 @@ const STORAGE_KEYS = {
  * Uses IIFE pattern to ensure single instance
  */
 export const axiosClient: AxiosInstance = (() => {
+
     return axios.create({
-        baseURL: import.meta.env.VITE_REACT_APP_BASE_URL,
+        baseURL: 'http://localhost:8080/api',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',

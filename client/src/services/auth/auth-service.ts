@@ -1,3 +1,4 @@
+import { Token } from 'aws-sdk';
 import axiosClient from '../../api/axios-client';
 import { AuthEndpoints } from '../../api/endpoints';
 import { RegisterFormInputs } from '../../components/auth/register';
@@ -24,6 +25,7 @@ export default class AuthService {
     static async loginUser(User: UserLogin): Promise<{ token: string, user: User }> {
 
         const response = await axiosClient.post(AuthEndpoints.login(), User);
+        console.log(response.data)
         return response.data;
     }
 
